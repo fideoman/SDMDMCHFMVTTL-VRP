@@ -10,8 +10,6 @@ import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.BinaryIntegerVariable;
 import org.moeaframework.core.variable.BinaryVariable;
 import org.moeaframework.core.variable.EncodingUtils;
-import org.moeaframework.core.variable.Permutation;
-import org.moeaframework.core.variable.RealVariable;
 import org.moeaframework.problem.AbstractProblem;
 
 import cl.usach.diinf.optimization.wqeissplus.helpers.IOUtils;
@@ -32,17 +30,15 @@ public class SDMDMCHFMVTTLVRP extends AbstractProblem implements Problem {
 	int n2 = 0;
 	int gdata = 0;
 	
+	// User Params
 	int i1 = 2;
 	int i2 = 3;
 		
 	int[] trucks = IntStream.range(0, i1).toArray();
-	int[] helicopter = IntStream.range(i1, i1 + i2).toArray();
-	
-	// User Params
-	
+	int[] helicopter = IntStream.range(i1, i1 + i2).toArray();		
 	
 	public SDMDMCHFMVTTLVRP() {
-		super(7, 2, 2);
+		super(7, 2, 22);
 		try {
 			c1 = IOUtils.readMatrix(this.getClass().getClassLoader().getResource("C1.csv").getFile());
 			c2 = IOUtils.readMatrix(this.getClass().getClassLoader().getResource("C2.csv").getFile());
@@ -66,11 +62,38 @@ public class SDMDMCHFMVTTLVRP extends AbstractProblem implements Problem {
 		}
 		n2 = c1.getColumnDimension() - n1;
 		gdata = d.getColumnDimension();
-		System.out.println("Hola");
 	}
 
 	@Override
 	public void evaluate(Solution solution) {
+		// Initialize output variables
+		double obj1 = 0.0;
+		double obj2 = 0.0;
+		
+		double constraint1  = 0.0;
+		double constraint2  = 0.0;
+		double constraint3  = 0.0;
+		double constraint4  = 0.0;
+		double constraint5  = 0.0;
+		double constraint6  = 0.0;
+		double constraint7  = 0.0;
+		double constraint8  = 0.0;
+		double constraint9  = 0.0;
+		double constraint10 = 0.0;
+		double constraint11 = 0.0;
+		double constraint12 = 0.0;
+		double constraint13 = 0.0;
+		double constraint14 = 0.0;
+		double constraint15 = 0.0;
+		double constraint16 = 0.0;
+		double constraint17 = 0.0;
+		double constraint18 = 0.0;
+		double constraint19 = 0.0;
+		double constraint20 = 0.0;
+		double constraint21 = 0.0;
+		double constraint22 = 0.0;
+		
+		// Problem definition section
 		double ctt = 0.0;
 		BinaryIntegerVariable s    = (BinaryIntegerVariable) solution.getVariable(0);
 		BinaryIntegerVariable p    = (BinaryIntegerVariable) solution.getVariable(1);
@@ -87,19 +110,41 @@ public class SDMDMCHFMVTTLVRP extends AbstractProblem implements Problem {
 		
 		int apertureCost = 0;
 		for (int idx = 0; idx < o.getRowDimension(); idx++) {
-			apertureCost += o.getEntry(idx, 0) * open.get(idx);
+			apertureCost += o.getEntry(idx, 0) * (open.get(idx) ? 1.0 : 0.0);
 		}		
 		
-		
-		solution.setObjective(0, 0);
-		solution.setObjective(1, 0);
-		solution.setConstraint(0, 0 <= 0.0 ? 0.0 : 1);
-		solution.setConstraint(1, 0 <= 0.0 ? 0.0 : 1);
+		// Final setup
+		// Two objectives
+		solution.setObjective(0, obj1);
+		solution.setObjective(1, obj2);
+		// 22 constraints
+		solution.setConstraint(0,  constraint1  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(1,  constraint2  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(2,  constraint3  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(3,  constraint4  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(4,  constraint5  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(5,  constraint6  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(6,  constraint7  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(7,  constraint8  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(8,  constraint9  <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(9,  constraint10 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(10, constraint11 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(11, constraint12 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(12, constraint13 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(13, constraint14 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(14, constraint15 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(15, constraint16 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(16, constraint17 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(17, constraint18 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(18, constraint19 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(19, constraint20 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(20, constraint21 <= 0.0 ? 0.0 : 1);
+		solution.setConstraint(21, constraint22 <= 0.0 ? 0.0 : 1);
 	}
 
 	@Override
 	public Solution newSolution() {
-		Solution solution = new Solution(7, 2, 2);
+		Solution solution = new Solution(7, 2, 22);
 		//s
 		solution.setVariable(0, EncodingUtils.newBinaryInt(0, g.getColumnDimension()));
 		//p
