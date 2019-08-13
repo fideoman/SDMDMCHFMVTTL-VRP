@@ -14,7 +14,7 @@ public class RunSolver {
 	public static void main(String[] args) {
 		NondominatedPopulation referenceSet = new NondominatedPopulation();
 		Executor executor = new Executor().withProblemClass(SDMDMCHFMVTTLVRP.class).distributeOnAllCores();
-		executor.withAlgorithm("NSGAII");
+		executor.withAlgorithm("NSGAII").withProperty("operator","sbx+hux+pm+bf");
 		referenceSet.addAll(executor.run());
 
 		// Store returned Pareto Fronts in your $HOME folder
