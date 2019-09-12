@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.time.Instant;
 
 import org.moeaframework.Executor;
-import org.moeaframework.core.NondominatedPopulation;
-import org.moeaframework.core.PopulationIO;
+import org.moeaframework.core.population.NondominatedPopulation;
+import org.moeaframework.util.io.PopulationIO;
 import org.moeaframework.problem.mip.SDMDMCHFMVTTLVRP;
 
 public class RunSolver {

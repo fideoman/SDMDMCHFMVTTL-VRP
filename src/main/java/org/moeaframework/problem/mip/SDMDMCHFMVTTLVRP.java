@@ -10,9 +10,9 @@ import org.moeaframework.core.Solution;
 import org.moeaframework.core.variable.BinaryIntegerVariable;
 import org.moeaframework.core.variable.BinaryVariable;
 import org.moeaframework.core.variable.EncodingUtils;
-import org.moeaframework.problem.AbstractProblem;
+import org.moeaframework.core.problem.AbstractProblem;
 
-import cl.usach.diinf.optimization.wqeissplus.helpers.IOUtils;
+import cl.usach.diinf.optimization.helpers.IOUtils;
 
 public class SDMDMCHFMVTTLVRP extends AbstractProblem implements Problem {
 	
